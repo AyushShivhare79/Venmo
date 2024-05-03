@@ -11,7 +11,7 @@ const Signup = () => {
         <Inputs type="password" label="Password" placeholder="12345678" />
         <Inputs type="text" label="First Name" placeholder="Ayush" />
         <Inputs type="text" label="Last Name" placeholder="Shivhare" />
-        <Inputs type="number" label="Mobile Number" placeholder="9234563215" />
+        <Inputs type="number" label="Mobile Number" placeholder="92345632" />
 
         <button>Submit</button>
         
