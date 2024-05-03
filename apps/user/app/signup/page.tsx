@@ -3,7 +3,6 @@
 import { Inputs } from "@repo/ui/Inputs";
 //Check 1
 const Signup = () => {
-
   return (
     <>
       <div>
@@ -11,10 +10,9 @@ const Signup = () => {
         <Inputs type="password" label="Password" placeholder="12345678" />
         <Inputs type="text" label="First Name" placeholder="Ayush" />
         <Inputs type="text" label="Last Name" placeholder="Shivhare" />
-        <Inputs type="number" label="Mobile Number" placeholder="92345632" />
+        <Inputs type="number" label="Mobile Number" placeholder="9234563215" />
 
         <button>Submit</button>
-        
       </div>
     </>
   );
