@@ -6,9 +6,14 @@ import { Appbar } from "@repo/ui/Appbar";
 
 export default function Page(): JSX.Element {
   const session = useSession();
+  console.log(session.data?.user);
   return (
     <>
-      {/* <Appbar user={session.data?.user} onSignout={signOut} onSignin={signIn} /> */}
+      <Appbar
+        user={session.data?.user?.name}
+        onSignout={signOut}
+        onSignin={signIn}
+      />
       <Test />
     </>
   );

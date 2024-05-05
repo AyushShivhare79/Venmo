@@ -1,17 +1,30 @@
-"use client"
+"use client";
 
 interface inputsProp {
+  id: string;
   type: string;
   label: string;
   placeholder: string;
+  onChange: any;
 }
 
-export const Inputs = ({ type, label, placeholder }: inputsProp) => {
+export const Inputs = ({
+  id,
+  type,
+  label,
+  placeholder,
+  onChange,
+}: inputsProp) => {
   return (
     <>
       <div>
-        <label htmlFor={type}>{label}</label>
-        <input type={type} id={type} placeholder={placeholder} />
+        <label htmlFor={id}>{label}</label>
+        <input
+          type={type}
+          id={id}
+          placeholder={placeholder}
+          onChange={onChange}
+        />
       </div>
     </>
   );
