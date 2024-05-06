@@ -26,6 +26,7 @@ export async function POST(req: NextRequest, res: NextRequest) {
       console.log("Here");
       return NextResponse.json({ msg: "Invalid inputs" });
     }
+
     const userExist = await prisma.user.findFirst({
       where: {
         username: userInfo.username,
