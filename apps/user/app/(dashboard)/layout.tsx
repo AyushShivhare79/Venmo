@@ -1,8 +1,12 @@
+import AppbarClient from "../AppbarClient";
 import { SidebarItems } from "../components/SidebarItems";
 
 export default function Layout({ children }: any) {
   return (
     <>
+      {/* make this on root layout */}
+      <AppbarClient />
+
       <div className=" grid grid-cols-10 h-screen">
         <div className="border col-span-2 pt-28 ">
           <SidebarItems title="Home" href="/dashboard" icon={<Home />} />
