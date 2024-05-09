@@ -40,15 +40,15 @@ export const authOptions = NextAuth({
           };
         }
         return null;
-        // return null;
       },
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async session({ token, session }: any) {
-      session.user.id = token.sub;
-      
+    async session({ token, user, session }: any) {
+      session.user.id = user.id;
+
+      console.log("Here", session);
       return session;
     },
   },

@@ -9,6 +9,7 @@ import {
 } from "@repo/store/signup";
 import { Inputs } from "@repo/ui/Inputs";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import { useRecoilState } from "recoil";
 
 //Check 1
@@ -20,8 +21,11 @@ const Signup = () => {
   const [lastName, setLastName] = useRecoilState(lastNameAtom);
   const [phoneNumber, setPhoneNumber] = useRecoilState(phoneNumberAtom);
 
+  const { data: session } = useSession();
+
   return (
     <>
+      {JSON.stringify(session)}
       <div>
         <Inputs
           id="username"
