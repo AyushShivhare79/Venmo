@@ -9,12 +9,16 @@ const prisma = new PrismaClient();
 
 async function getBalance() {
   const session = await getServerSession(authOptions);
-  console.log("This is your session id: ", session);
- 
+  console.log("This is your session id: ", session.user);
+
   const balance = await prisma.balance.findFirst({
     where: {
-      userId: Number(session.user.id),
-      // userId: Number(session.u)
+      // userId: Number(session?.user?.id),
+
+
+
+      userId: Number(session),
+      // userId: Number(session)
     },
   });
   return {
@@ -27,7 +31,8 @@ async function getOnRampTransactions() {
   const session = await getServerSession(authOptions);
   const txns = await prisma.onRampTransaction.findMany({
     where: {
-      userId: Number(session?.user?.id),
+      // userId: Number(session?.user?.id),
+      userId: Number(session)
     },
   });
   return txns.map((t) => ({

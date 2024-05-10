@@ -22,10 +22,10 @@ const Signup = () => {
   const [phoneNumber, setPhoneNumber] = useRecoilState(phoneNumberAtom);
 
   const { data: session } = useSession();
-
+  console.log(session?.user?.email);
   return (
     <>
-      {JSON.stringify(session)}
+      {JSON.stringify(session?.user?.email)}
       <div>
         <Inputs
           id="username"

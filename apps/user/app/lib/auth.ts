@@ -45,8 +45,8 @@ export const authOptions = NextAuth({
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async session({ token, user, session }: any) {
-      session.user.id = user.id;
+    async session({ token, session }: any) {
+      session.user.id = token.sub;
 
       console.log("Here", session);
       return session;
