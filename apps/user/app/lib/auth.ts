@@ -24,14 +24,12 @@ export const authOptions = NextAuth({
       async authorize(credentials) {
         const username = credentials?.username || "";
         const password = credentials?.password || "";
-        console.log(username, password);
         const userExist = await prisma.user.findFirst({
           where: {
             username,
             password,
           },
         });
-        console.log(userExist);
         if (userExist) {
           return {
             id: userExist.id.toString(),
@@ -46,10 +44,12 @@ export const authOptions = NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async session({ token, session }: any) {
-      session.user.id = token.sub;
+      session.user.id = await token.sub;
 
       console.log("Here", session);
       return session;
     },
   },
 });
+
+
