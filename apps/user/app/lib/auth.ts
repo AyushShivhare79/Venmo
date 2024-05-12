@@ -1,10 +1,9 @@
 import { PrismaClient } from "@repo/db";
-import NextAuth from "next-auth/next";
 import Credentials from "next-auth/providers/credentials";
 
 const prisma = new PrismaClient();
 
-export const authOptions = NextAuth({
+export const authOptions = {
   providers: [
     Credentials({
       name: "Credentials",
@@ -45,11 +44,7 @@ export const authOptions = NextAuth({
   callbacks: {
     async session({ token, session }: any) {
       session.user.id = await token.sub;
-
-      console.log("Here", session);
       return session;
     },
   },
-});
-
-
+};
