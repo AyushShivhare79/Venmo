@@ -1,16 +1,27 @@
-"use client"
+"use client";
+
+import { ChangeEventHandler } from "react";
 
 export const TextInput = ({
-    placeholder,
-    onChange,
-    label
+  label,
+  placeholder,
+  onChange,
 }: {
-    placeholder: string;
-    onChange: (value: string) => void;
-    label: string;
+  label: string;
+  placeholder: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
 }) => {
-    return <div className="pt-2">
-        <label className="block mb-2 text-sm font-medium text-gray-900">{label}</label>
-        <input onChange={(e) => onChange(e.target.value)} type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder={placeholder} />
-    </div>
-}
+  return (
+    <>
+      <div className="flex flex-col">
+        <label htmlFor="">{label}</label>
+        <input
+          type="text"
+          placeholder={placeholder}
+          onChange={onChange}
+          className="border rounded-md p-2 focus:outline-none focus:border-blue-500 focus:border-2  "
+        />
+      </div>
+    </>
+  );
+};

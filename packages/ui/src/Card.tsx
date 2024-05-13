@@ -1,20 +1,14 @@
-import React from "react";
-
-export function Card({
-  title,
-  children,
-}: {
+interface props {
   title: string;
-  children?: React.ReactNode;
-}): JSX.Element {
-  return (
-    <div
-      className="border p-4"
-    >
-      <h1 className="text-xl border-b pb-2">
-        {title}
-      </h1>
-      <p>{children}</p>
-    </div>
-  );
+  children: any;
 }
+export const Card = ({ title, children }: props) => {
+  return (
+    <>
+      <div className="border p-4">
+        <h1 className="border-b pb-2 text-xl">{title}</h1>
+        <div className="pt-2">{children}</div>
+      </div>
+    </>
+  );
+};
