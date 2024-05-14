@@ -1,18 +1,24 @@
-import { PrismaClient } from "@repo/db";
-import { AddMoney } from "../../components/AddMoneyCard";
-import { BalanceCard } from "../../components/BalanceCard";
-import { OnRampTransactions } from "../../components/OnRampTransactions";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../lib/auth";
+import { PrismaClient } from ".prisma/client";
+
+import { AddMoney } from "../../components/AddMoneyCard";
+import { BalanceCard } from "../../components/BalanceCard";
+
+import { OnRampTransactions } from "../../components/OnRampTransactions";
+import { Center } from "@repo/ui/Center";
 
 const prisma = new PrismaClient();
+
+const session = await getServerSession(authOptions);
+
 async function getBalance() {
-  const session = await getServerSession(authOptions);
   const balance = await prisma.balance.findFirst({
     where: {
-      userId: Number(session?.user?.id),
+      userId: Number(session.user.id),
     },
   });
+
   return {
     amount: balance?.amount || 0,
     locked: balance?.locked || 0,
@@ -20,12 +26,12 @@ async function getBalance() {
 }
 
 async function getOnRampTransactions() {
-  const session = await getServerSession(authOptions);
   const txns = await prisma.onRampTransaction.findMany({
     where: {
-      userId: Number(session?.user?.id),
+      userId: Number(session.user.id),
     },
   });
+
   return txns.map((t) => ({
     time: t.startTime,
     amount: t.amount,
@@ -39,21 +45,23 @@ export default async function () {
   const transactions = await getOnRampTransactions();
 
   return (
-    <div className="w-screen">
-      <div className="text-4xl text-[#6a51a6] pt-8 mb-8 font-bold">
-        Transfer
-      </div>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 p-4">
-        <div>
-          <AddMoney />
+    <>
+      <div className=" w-screen ">
+        <div className="text-4xl text-purple-500 font-semibold pb-20">
+          Transfer
         </div>
-        <div>
-          <BalanceCard amount={balance.amount} locked={balance.locked} />
-          <div className="pt-4">
+        <div className="grid grid-cols-2 gap-5 w-4/5">
+          <div>
+            <AddMoney />
+          </div>
+
+          <div className="grid gap-4">
+            <BalanceCard amount={balance.amount} locked={balance.locked} />
+
             <OnRampTransactions transactions={transactions} />
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

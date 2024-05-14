@@ -7,8 +7,8 @@ export default function Layout({ children }: any) {
       {/* make this on root layout */}
       <AppbarClient />
 
-      <div className=" grid grid-cols-10 h-screen">
-        <div className="border col-span-2 pt-28 ">
+      <div className="flex h-screen">
+        <div className="flex flex-col w-60 border pt-28">
           <SidebarItems title="Home" href="/dashboard" icon={<Home />} />
           <SidebarItems title="Transfer" href="/transfer" icon={<Transfer />} />
           <SidebarItems
@@ -17,7 +17,7 @@ export default function Layout({ children }: any) {
             icon={<Transactions />}
           />
         </div>
-        <div className=" col-span-8">{children}</div>
+        <div className=" overflow-hidden">{children}</div>
       </div>
     </>
   );

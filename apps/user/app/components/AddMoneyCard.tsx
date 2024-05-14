@@ -25,8 +25,8 @@ export const AddMoney = () => {
   const [redirectUrl, setRedirectUrl] = useState(BANKS[0]?.redirectUrl);
   return (
     <>
-      <div>
-        <Card title="Add Money">
+      <Card title="Add Money">
+        <div>
           <TextInput label="Amount" placeholder="Amount" onChange={() => {}} />
           <div>Bank</div>
           <Select
@@ -43,8 +43,8 @@ export const AddMoney = () => {
           <Button onClick={() => (window.location.href = redirectUrl || "")}>
             Add Money
           </Button>
-        </Card>
-      </div>
+        </div>
+      </Card>
     </>
   );
 };
