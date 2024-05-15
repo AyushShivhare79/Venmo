@@ -1,5 +1,7 @@
 import { PrismaClient } from "@repo/db";
 import Credentials from "next-auth/providers/credentials";
+import { signIn, signOut } from "next-auth/react";
+import { pages } from "next/dist/build/templates/app-page";
 
 const prisma = new PrismaClient();
 
@@ -29,6 +31,7 @@ export const authOptions = {
             password,
           },
         });
+
         if (userExist) {
           return {
             id: userExist.id.toString(),
@@ -46,5 +49,9 @@ export const authOptions = {
       session.user.id = await token.sub;
       return session;
     },
+  },
+  pages: {
+    signIn: "/signin",
+    signOut: "/signin",
   },
 };

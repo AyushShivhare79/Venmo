@@ -12,16 +12,16 @@ function AppbarClient() {
     <>
       <Appbar
         user={session.data?.user?.name}
-        // onSignout={async () => {
-        //   await signOut();
-        //   router.push("/api/auth/signin");
-        // }}
         onSignout={() =>
           signOut({
             callbackUrl: "/api/auth/signin",
           })
         }
-        onSignin={signIn}
+        onSignin={() =>
+          signIn("credentials", {
+            callbackUrl: "/dashboard",
+          })
+        }
       />
     </>
   );

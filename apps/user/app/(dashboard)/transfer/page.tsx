@@ -6,7 +6,6 @@ import { AddMoney } from "../../components/AddMoneyCard";
 import { BalanceCard } from "../../components/BalanceCard";
 
 import { OnRampTransactions } from "../../components/OnRampTransactions";
-import { Center } from "@repo/ui/Center";
 
 const prisma = new PrismaClient();
 
