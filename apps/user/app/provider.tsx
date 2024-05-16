@@ -6,8 +6,8 @@ import { RecoilRoot } from "recoil";
 
 export const Provider = ({ children }: { children: React.ReactNode }) => {
   return (
-    <RecoilRoot>
-      <SessionProvider>{children}</SessionProvider>
-    </RecoilRoot>
+    <SessionProvider>
+      <RecoilRoot>{children}</RecoilRoot>
+    </SessionProvider>
   );
 };

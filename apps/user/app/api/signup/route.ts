@@ -34,7 +34,8 @@ export async function POST(req: NextRequest, res: NextRequest) {
     });
     console.log(userExist);
     if (userExist) {
-      return NextResponse.json({ msg: "User already exists please Login" });
+      // return NextResponse.json({ msg: "User already exists please Login" });
+      return NextResponse.json({ msg: "0" });
     }
     const response = await prisma.user.create({
       data: {
@@ -45,7 +46,9 @@ export async function POST(req: NextRequest, res: NextRequest) {
         password: userInfo.password,
       },
     });
-    return NextResponse.json({ msg: "User created successful", response });
+    // return NextResponse.json({ msg: "User created successful", response });
+    return NextResponse.json({ msg: "1", response });
+
   } catch {
     return NextResponse.json({ msg: "Fucked up" });
   }
