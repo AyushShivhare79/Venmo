@@ -1,8 +1,9 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../lib/auth";
 import { PrismaClient } from ".prisma/client";
+import { redirect } from "next/navigation";
 
-import { AddMoney } from "../../components/AddMoneyCard";
+import AddMoney from "../../components/AddMoneyCard";
 import { BalanceCard } from "../../components/BalanceCard";
 
 import { OnRampTransactions } from "../../components/OnRampTransactions";
@@ -10,6 +11,14 @@ import { OnRampTransactions } from "../../components/OnRampTransactions";
 const prisma = new PrismaClient();
 
 const session = await getServerSession(authOptions);
+
+// if (typeof window === "undefined") return null;
+
+// async function userExist() {
+//   if (!session) {
+//     return undefined;
+//   }
+// }
 
 async function getBalance() {
   const balance = await prisma.balance.findFirst({

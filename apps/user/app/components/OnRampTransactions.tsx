@@ -27,11 +27,21 @@ export const OnRampTransactions = ({ transactions }: props) => {
     <>
       <Card title="Recent Transactions">
         {transactions.map((t) => (
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center pt-1 pb-2 border-b-2">
             <div className="flex flex-col">
               <div className="text-sm">Received INR</div>
-              <div className="text-slate-400 text-xs">
-                {t.time.toDateString()}
+              <div>
+                {t.status === "Processing" ? (
+                  <div className=" text-yellow-500 font-semibold ">
+                    {t.status}
+                  </div>
+                ) : (
+                  <div className="text-green-500">{t.status}</div>
+                )}
+
+                <div className="text-slate-400 text-xs ">
+                  {t.time.toDateString()}
+                </div>
               </div>
             </div>
             <div>+ Rs {t.amount / 100}</div>

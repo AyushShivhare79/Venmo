@@ -5,7 +5,7 @@ export default function Layout({ children }: any) {
   return (
     <>
       {/* make this on root layout */}
-      {/* <AppbarClient /> */}
+      <AppbarClient />
 
       <div className="flex h-screen">
         <div className="flex flex-col w-60 border pt-28">
