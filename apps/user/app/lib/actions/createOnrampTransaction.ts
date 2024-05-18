@@ -28,6 +28,22 @@ export async function createOnRampTransaction(
       amount: amount * 100,
     },
   });
+  const response = await prisma.balance.findFirst({
+    where: {
+      userId: Number(session?.user?.id),
+    },
+  });
+  console.log("Response hu vro: ", response);
+
+  if (!response) {
+    const balance = await prisma.balance.create({
+      data: {
+        userId: Number(session?.user?.id),
+        amount: 0,
+        locked: 0,
+      },
+    });
+  }
 
   return {
     message: "Done",

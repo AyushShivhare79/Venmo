@@ -46,6 +46,7 @@ export async function POST(req: NextRequest, res: NextRequest) {
         password: userInfo.password,
       },
     });
+    
     // return NextResponse.json({ msg: "User created successful", response });
     return NextResponse.json({ msg: "1", response });
 

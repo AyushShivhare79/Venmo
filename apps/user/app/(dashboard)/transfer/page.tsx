@@ -59,7 +59,7 @@ export default async function () {
           Transfer
         </div>
         <div className="grid grid-cols-2 gap-5 w-4/5">
-          <div>
+          <div className="pl-5">
             <AddMoney />
           </div>
 

@@ -12,8 +12,9 @@ app.post("/hdfcWebhook", async (req, res) => {
     userId: req.body.userId,
     amount: req.body.amount,
   };
+  console.log(paymentInformation);
   try {
-    await prisma.$transaction([
+    const response = await prisma.$transaction([
       prisma.balance.update({
         where: {
           userId: Number(paymentInformation.userId),
@@ -33,9 +34,13 @@ app.post("/hdfcWebhook", async (req, res) => {
       }),
     ]);
 
+    console.log("This is the response: ", response);
+
     res.json({
       msg: "Captured",
     });
+
+    console.log("HERE");
   } catch (e) {
     console.error(e);
     res.status(411).json({
