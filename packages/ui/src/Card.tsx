@@ -5,7 +5,7 @@ interface props {
 export const Card = ({ title, children }: props) => {
   return (
     <>
-      <div className="border p-4">
+      <div className="border p-4 rounded-xl">
         <div className="border-b pb-2 text-xl">{title}</div>
         <div className="pt-2">{children}</div>
       </div>
