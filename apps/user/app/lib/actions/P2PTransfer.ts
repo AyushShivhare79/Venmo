@@ -16,8 +16,36 @@ export const p2p = async (pNumber: any, amount: any) => {
 
   const userId = Number(response?.id);
 
-  await prisma.$transaction([
-    prisma.balance.update({
+  const to = await prisma.balance.findFirst({
+    where: {
+      userId: userId,
+    },
+  });
+
+  if (!to) {
+    await prisma.balance.create({
+      data: {
+        userId,
+        amount: 0,
+        locked: 0,
+      },
+    });
+  }
+  
+  const from = await prisma.balance.findFirst({
+    where: {
+      userId: Number(session?.user?.id),
+    },
+  });
+
+  console.log("From wala hu vro: ", from);
+  const fromAmount = from?.amount || 0;
+
+  await prisma.$transaction(async (txn) => {
+    if (fromAmount / 100 < amount) {
+      throw new Error(`Bro what the fuck is amount`);
+    }
+    await txn.balance.update({
       where: {
         userId: Number(userId),
       },
@@ -25,14 +53,22 @@ export const p2p = async (pNumber: any, amount: any) => {
         amount: { increment: Number(amount * 100) },
       },
     }),
+      await txn.balance.update({
+        where: {
+          userId: Number(session?.user?.id),
+        },
+        data: {
+          amount: { decrement: Number(amount * 100) },
+        },
+      });
 
-    prisma.balance.update({
-      where: {
-        userId: Number(session?.user?.id),
-      },
+    await prisma.p2P.create({
       data: {
-        amount: { decrement: Number(amount * 100) },
+        fromUserId: Number(session?.user?.id),
+        toUserId: Number(userId),
+        startTime: new Date(),
+        amount: Number(amount * 100),
       },
-    }),
-  ]);
+    });
+  });
 };

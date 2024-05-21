@@ -52,14 +52,16 @@ const AddMoney = () => {
               value: x.name,
             }))}
           />
-          <Button
-            onClick={async () => {
-              await createOnRampTransaction(provider, amount);
-              window.location.href = redirectUrl || "";
-            }}
-          >
-            Add Money
-          </Button>
+          <div className="flex justify-center pt-2">
+            <Button
+              onClick={async () => {
+                await createOnRampTransaction(provider, amount);
+                window.location.href = redirectUrl || "";
+              }}
+            >
+              Add Money
+            </Button>
+          </div>
         </div>
       </Card>
     </>

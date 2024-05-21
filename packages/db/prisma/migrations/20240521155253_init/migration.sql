@@ -14,6 +14,17 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
+CREATE TABLE "P2P" (
+    "id" SERIAL NOT NULL,
+    "startTime" TIMESTAMP(3) NOT NULL,
+    "fromUserId" INTEGER NOT NULL,
+    "toUserId" INTEGER NOT NULL,
+    "amount" INTEGER NOT NULL,
+
+    CONSTRAINT "P2P_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "OnRampTransaction" (
     "id" SERIAL NOT NULL,
     "status" "OnRampStatus" NOT NULL,
@@ -44,6 +55,12 @@ CREATE UNIQUE INDEX "OnRampTransaction_token_key" ON "OnRampTransaction"("token"
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Balance_userId_key" ON "Balance"("userId");
+
+-- AddForeignKey
+ALTER TABLE "P2P" ADD CONSTRAINT "P2P_fromUserId_fkey" FOREIGN KEY ("fromUserId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "P2P" ADD CONSTRAINT "P2P_toUserId_fkey" FOREIGN KEY ("toUserId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "OnRampTransaction" ADD CONSTRAINT "OnRampTransaction_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

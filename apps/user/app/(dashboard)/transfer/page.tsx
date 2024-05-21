@@ -54,11 +54,11 @@ export default async function () {
 
   return (
     <>
-      <div className=" w-screen ">
+      <div className="w-full">
         <div className="text-4xl text-purple-500 font-semibold pb-20">
           Transfer
         </div>
-        <div className="grid grid-cols-2 gap-5 w-4/5">
+        <div className="grid grid-cols-2 gap-5">
           <div className="pl-5">
             <AddMoney />
           </div>
