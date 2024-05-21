@@ -3,14 +3,16 @@
 import { PrismaClient } from "@repo/db";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth";
+import { toast } from "react-toastify";
 
 const prisma = new PrismaClient();
 
-export const p2p = async (pNumber: any, amount: any) => {
+export const p2p = async (pnumber: any, amount: any) => {
+  // const id = toast.loading("Pending...")
   const session = await getServerSession(authOptions);
   const response = await prisma.user.findFirst({
     where: {
-      phoneNumber: pNumber.toString(),
+      phoneNumber: pnumber.toString(),
     },
   });
 
@@ -31,7 +33,7 @@ export const p2p = async (pNumber: any, amount: any) => {
       },
     });
   }
-  
+
   const from = await prisma.balance.findFirst({
     where: {
       userId: Number(session?.user?.id),
@@ -70,5 +72,10 @@ export const p2p = async (pNumber: any, amount: any) => {
         amount: Number(amount * 100),
       },
     });
+    // toast.update(id, {
+    //   render: "User created successful!",
+    //   type: "success",
+    //   isLoading: false,
+    // });
   });
 };

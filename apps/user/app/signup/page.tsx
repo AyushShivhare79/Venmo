@@ -69,7 +69,11 @@ const Signup = () => {
 
           {/* // */}
           <button
+            // Try to disable button after one click
+
             onClick={async () => {
+              // toast.loading("Please wait...")
+              const id = toast.loading("Please wait...");
               const response = await axios.post(
                 "http://localhost:3000/api/signup",
                 {
@@ -84,9 +88,17 @@ const Signup = () => {
               console.log("During signup: ", response.data.msg);
 
               if (response.data.msg === "1") {
-                toast.success("User Signup successful!");
+                toast.update(id, {
+                  render: "User created successful!",
+                  type: "success",
+                  isLoading: false,
+                });
               } else {
-                toast.error("User already register!");
+                toast.update(id, {
+                  render: "User already register!",
+                  type: "error",
+                  isLoading: false,
+                });
               }
             }}
             className="block m-auto border rounded-md mt-2 bg-blue-600 text-white h-8 w-52"

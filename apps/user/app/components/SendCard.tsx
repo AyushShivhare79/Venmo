@@ -5,10 +5,16 @@ import { TextInput } from "@repo/ui/TextInput";
 import { useState } from "react";
 import { p2p } from "../lib/actions/P2PTransfer";
 import { Button } from "@repo/ui/button";
+import { toast } from "react-toastify";
 
 export const SendCard = () => {
   const [pnumber, setPnumber] = useState<Number>();
   const [amount, setAmount] = useState<Number>();
+
+  const handleClick = async () => {
+    const id = toast.loading("Pending...");
+    const data = await p2p(pnumber, amount);
+  };
   return (
     <Card title="Send Money">
       <TextInput
@@ -22,13 +28,7 @@ export const SendCard = () => {
         onChange={(e) => setAmount(Number(e.target.value))}
       />
       <div className="flex justify-center pt-2">
-        <Button
-          onClick={async () => {
-            await p2p(pnumber, amount);
-          }}
-        >
-          Send
-        </Button>
+        <Button onClick={handleClick}>Send</Button>
       </div>
     </Card>
   );
